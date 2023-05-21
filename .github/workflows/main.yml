@@ -14,4 +14,4 @@ jobs:
       - name: memes on isssues
         uses: deep5050/memes-on-issues-action@main
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
