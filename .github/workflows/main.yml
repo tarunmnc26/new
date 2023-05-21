@@ -1,14 +1,15 @@
+name: "GreetContributor"
 on: pull_request
-
+    
 jobs:
-  example_comment_pr:
+  GreetCommitter:    
     runs-on: ubuntu-latest
-    name: An example job to comment a PR
     steps:
-      - name: Checkout
-        uses: github-actions-up-and-running/pr-comment@v1.0.0
-        with:
-          repo-token: ${{ secrets.GITHUB_TOKEN }}
-          message: Nice PR!👍
+    - name: "Greet contributor"
+      uses: ibakshay/greet-contributors-action@v3
+      env: 
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with: 
+        content: "THANKS FOR CONTRIBUTING 👍. WILL LOOK INTO THE PR SOON."
  
   
