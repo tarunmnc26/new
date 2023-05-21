@@ -13,11 +13,6 @@ jobs:
     steps:
       - name: new
         uses: actions/checkout@v2
-
-      - name: Send PR Created Message
-        uses: microsoft/teams-notification@v1
-        env:
-          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         with:
           title: New PR Created
           message: |
