@@ -6,10 +6,9 @@ jobs:
     name: An example job to comment a PR
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        uses: github-actions-up-and-running/pr-comment@v1.0.0
         with:
-          message: |
-            Hello world ! :wave:
- 
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          message: Nice PR!👍
  
   
