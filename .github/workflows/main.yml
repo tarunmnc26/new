@@ -1,4 +1,4 @@
-name: Send PR Created Message
+name: Funny Comment on PR Creation
 
 on:
   pull_request:
@@ -7,17 +7,16 @@ on:
   issues:    
 
 jobs:
-  send_message:
+  send_funny_comment:
     runs-on: ubuntu-latest
 
     steps:
-      - name: new
+      - name: Check out repository
         uses: actions/checkout@v2
-        with:
-          title: New PR Created
-          message: |
-            A new pull request has been created:
-            - Repository: ${{ github.repository }}
-            - Author: ${{ github.event.pull_request.user.login }}
-            - Title: ${{ github.event.pull_request.title }}
-            - URL: ${{ github.event.pull_request.html_url }}
+
+      - name: Send Funny Comment on PR Creation
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          comment_message="🎉 Congratulations on creating a new pull request! This is going to be LEGENDARY! 🚀"
+          echo "$comment_message" | gh pr comment ${{ github.event.pull_request.number }} -R ${{ github.repository }}
