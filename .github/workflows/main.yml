@@ -1,18 +1,28 @@
-name: "Greet With A Random Meme"
-on:
-  issues:
-    types: [opened, reopened]
+name: Send PR Created Message
 
+on:
+  pull_request:
+    types:
+      - opened
+  issues:    
 
 jobs:
-  test:
-    name: setup environment
+  send_message:
     runs-on: ubuntu-latest
+
     steps:
-      - name: memes on isssues
-        uses: deep5050/memes-on-issues-action@main
+      - name: new
+        uses: actions/checkout@v2
+
+      - name: Send PR Created Message
+        uses: microsoft/teams-notification@v1
+        env:
+          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
         with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          issue_msg: 'Hi {{author}} enjoy this {{meme}}' # change accordingly
-          PR_msg: 'Hi {{author}} enjoy this {{meme}}' # change accordingly
-          allow_owner: true # get meme on your own issue :)
+          title: New PR Created
+          message: |
+            A new pull request has been created:
+            - Repository: ${{ github.repository }}
+            - Author: ${{ github.event.pull_request.user.login }}
+            - Title: ${{ github.event.pull_request.title }}
+            - URL: ${{ github.event.pull_request.html_url }}
