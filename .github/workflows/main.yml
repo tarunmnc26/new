@@ -1,28 +1,15 @@
-name: Send PR Created Message
+name: JAI CODING CLUB 
 
-on:
-  pull_request:
-    types:
-      - opened
-  issues:    
+on: [pull_request_target, issues]
 
 jobs:
-  send_message:
+  greeting:
     runs-on: ubuntu-latest
-
     steps:
-      - name: new
-        uses: actions/checkout@v2
-
-      - name: Send PR Created Message
-        uses: microsoft/teams-notification@v1
-        env:
-          WEBHOOK_URL: ${{ secrets.TEAMS_WEBHOOK_URL }}
-        with:
-          title: New PR Created
-          message: |
-            A new pull request has been created:
-            - Repository: ${{ github.repository }}
-            - Author: ${{ github.event.pull_request.user.login }}
-            - Title: ${{ github.event.pull_request.title }}
-            - URL: ${{ github.event.pull_request.html_url }}
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: "THANKS FOR SHARING YOUR ISSUE . WILL LOOK INTO THE PROBLEM SOON."
+        pr-message: "THANKS FOR CONTRIBUTING 👍. WILL LOOK INTO THE PR SOON."
+ 
+  
