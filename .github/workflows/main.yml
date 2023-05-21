@@ -1,22 +1,22 @@
-name: Funny Comment on PR Creation
-
+name: funny comment 
 on:
   pull_request:
-    types:
-      - opened
-  issues:    
-
+  issues:
+ 
 jobs:
-  send_funny_comment:
+  comment:
+    if: github.event_name == 'pull_request' || github.event_name == 'issues'
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check out repository
-        uses: actions/checkout@v3 
-
-      - name: Send Funny Comment on PR Creation
-        env:
+      - name: add funny comment
+        uses: Marta83/funny-comment-action@v2.1
+        id: FunnyComment
+        with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          comment_message="🎉 Congratulations on creating a new pull request! This is going to be LEGENDARY! 🚀"
-          echo "$comment_message" | gh pr comment ${{ github.event.pull_request.number }} -R ${{ github.repository }}
+          GIPHY_TOKEN: ${{ secrets.GIPHY_TOKEN }}
+          comment_type: 'chuck'
+ 
+ 
+ 
+ 
+  
