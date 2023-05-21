@@ -4,17 +4,12 @@ on:
   issues:
  
 jobs:
-  comment:
-    if: github.event_name == 'pull_request' || github.event_name == 'issues'
+  bash-example:
     runs-on: ubuntu-latest
     steps:
-      - name: add funny comment
-        uses: Marta83/funny-comment-action@v2.1
-        id: FunnyComment
-        with:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GIPHY_TOKEN: ${{ secrets.GIPHY_TOKEN }}
-          comment_type: 'chuck'
+      - name: Group of log lines
+        run: |
+            echo "hi"
  
  
  
